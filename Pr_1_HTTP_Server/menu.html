@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+     <link rel="icon" type="image/x-icon" href="https://hotcoffee-html.themerex.net/images/favicon.png" />
+  <title>Hot Coffee — Menu</title>
+
+  <!-- Google fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --accent:#6b4a33;
+      --accent-2:#d6b58a;
+      --muted:#7b6a65;
+      --bg:#faf7f3;
+      --card-bg:#fffdfb;
+      --radius:12px;
+      --shadow: 0 10px 30px rgba(15,12,10,0.06);
+      --max-width:1150px;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:"Poppins",system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+      background:var(--bg);
+      color:#222;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+    }
+    a{color:inherit;text-decoration:none}
+
+  /* Header */
+    .header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:18px 6vw;
+      background:#fff;
+      border-bottom:1px solid #eee;
+      position:sticky;
+      top:0;
+      z-index:50;
+    }
+    .logo{
+        width: 120px;
+        height: 30px;
+        display:flex;
+        align-items:center;
+        gap:12px
+    }
+
+    nav.nav{
+      display:flex;
+      gap:26px;
+      align-items:center;
+      padding:0;
+      margin:0;
+    }
+    nav.nav a{
+      text-decoration:none;
+      color:#2b2b2b;
+      font-weight:600;
+      font-size:15px;
+      padding:6px 0;
+      position:relative;
+    }
+    nav.nav a.active::after{
+      content:"";position:absolute;left:0;right:0;bottom:-10px;height:3px;width:50%;margin:0 auto;background:var(--accent);border-radius:3px;
+    }
+
+    .cart{
+      text-align:right;
+      font-size:13px;
+      color:#222
+    }
+    .cart .icon{
+      font-size:20px;
+      display:block;
+      margin-bottom:4px
+    }
+    .cart small{
+      display:block;
+      color:var(--muted);
+      font-weight:600;
+      font-size:11px
+    }
+    .menu-banner{
+      background:linear-gradient(rgba(20,18,16,0.22), rgba(20,18,16,0.12)), 
+      url("https://hotcoffee-html.themerex.net/images/top_bg_7.jpg");
+      background-size:cover;
+      background-position:center;
+      color:#fff;
+      padding:64px 6vw;
+    }
+    .menu-banner.wrap{
+      max-width:var(--max-width); 
+      margin:0 auto; 
+      display:flex;
+      gap:30px; 
+      align-items:center;
+      justify-content:space-between; }
+    .menu-banner h1{
+       margin:0; 
+       font-family:"Playfair Display"; 
+       font-size:44px;
+       color: #453e3c; }
+    .menu-banner p{
+       margin:6px 0 0 0;
+        opacity:0.95; 
+        max-width:620px; 
+        color: #453e3c;}
+    .container{
+       max-width:var(--max-width);
+        margin:40px auto; 
+        padding:0 6vw; 
+      }
+    .categories{
+       display:flex;
+        gap:12px;
+         flex-wrap:wrap;
+          margin-bottom:22px; 
+        }
+    .cat{
+      background:#fff; padding:10px 14px; border-radius:10px; font-weight:700; cursor:pointer;
+      box-shadow: 0 6px 18px rgba(15,12,10,0.04);
+    }
+
+    .menu-grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:22px;
+    }
+
+    .menu-card{
+      background-size: cover;
+      background:var(--card-bg);
+      border-radius:var(--radius);
+      overflow:hidden;
+      box-shadow:var(--shadow);
+      display:flex;
+      flex-direction:column;
+      transition:transform .18s ease, box-shadow .18s ease;
+    }
+    .menu-card:hover{ transform:translateY(-6px); box-shadow:0 18px 40px rgba(15,12,10,0.12); }
+
+    .menu-media{
+      width:100%;
+      height:160px;
+      object-fit:cover;
+      display:block;
+    }
+
+    .menu-body{
+      padding:14px 16px 18px;
+      flex:1;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+    }
+    .meta-top{
+      display:flex; 
+      justify-content:space-between; 
+      align-items:flex-start; 
+      gap:8px; 
+    }
+    .meta-top h3{ 
+      margin:0; 
+      font-family:"Playfair Display"; 
+      font-size:18px; 
+    }
+    .price{
+       font-weight:800; 
+       color:var(--accent); 
+       font-size:16px;
+       }
+
+    .desc{
+       margin:8px 0 0;
+        color:var(--muted); 
+        font-size:14px;
+         min-height:40px;
+         }
+
+    .card-footer{ 
+      display:flex; 
+      justify-content:space-between;
+      align-items:center; 
+      margin-top:12px;
+       gap:10px; }
+    .badge{ 
+      background:var(--accent-2); 
+      color:var(--accent); 
+      padding:6px 10px; 
+      border-radius:8px; 
+      font-weight:700; 
+      font-size:13px; 
+    }
+    .btn-order{
+       background:var(--accent); 
+       color:#fff; 
+       padding:9px 12px; 
+       border-radius:8px;
+        font-weight:700;
+         font-size:14px; 
+         text-decoration:none;
+         }
+         .section-head{
+       display:flex;
+        justify-content:space-between;
+         align-items:center; 
+         margin-bottom:12px; 
+        }
+    .section-head h2{ 
+      margin:0;
+       font-size:20px;
+       }
+
+    footer{ 
+      margin-top:48px;
+       background:#1b1b1b;
+        color:#fff;
+         padding:30px 6vw;
+          border-top:4px solid rgba(214,181,138,0.10);
+         }
+    .foot-inner{
+       max-width:var(--max-width);
+        margin:0 auto;
+        display:flex;
+        justify-content:space-between; 
+        gap:20px; 
+        align-items:center; 
+      }
+    footer small{ 
+      color:#d6c6b8; 
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="logo">
+   
+      <img src="https://hotcoffee-html.themerex.net/images/alternative-logo.png" alt="Hot Coffee Logo">
+    </div>
+ 
+    <nav class="nav" aria-label="Main navigation">
+      <a href="/" >Home</a>
+      <a href="reservation">Reservations</a>
+      <a href="menu"class="active">Menu</a>
+      <a href="blog">Blog</a>
+      <a href="features">Features</a>
+     
+      <a href="contact">Contacts</a>
+    </nav>
+
+    <div style="display:flex;align-items:center;gap:12px">
+      <div class="cart" aria-hidden="true">
+        <span class="icon">🛒</span>
+        <strong>YOUR CART</strong>
+        <small>0 ITEMS — $0.00</small>
+      </div>
+
+     
+    </div>
+  </header>
+
+  <section class="menu-banner" >
+    <div class="wrap">
+      <div>
+        <h1>Our Menu</h1>
+        <p>Crafted with care — from single-origin espresso to seasonal specials and fresh pastries. Scroll or use the categories to explore.</p>
+      </div>
+      <div style="text-align:right">
+        <div style="background:rgba(255,255,255,0.06);padding:12px 18px;border-radius:12px;font-weight: 600; color: #453e3c">Open:
+           <strong style=" font-weight: 600; ">8:00 AM — 10:00 PM</strong></div>
+      </div>
+    </div>
+  </section>
+
+  <main class="container" id="menu">
+    <div class="section-head">
+      <h2>Popular picks</h2>
+      <div class="categories" aria-hidden="true">
+        <div class="cat">Espresso</div>
+        <div class="cat">Cold Drinks</div>
+        <div class="cat">Pastries</div>
+        <div class="cat">Specials</div>
+      </div>
+    </div>
+
+    <div class="menu-grid">
+      <!-- Card 1 -->
+      <article class="menu-card">
+        <img class="menu-media" src="https://images.unsplash.com/photo-1511920170033-f8396924c348?q=80&w=1200&auto=format&fit=crop&s=ae7b9a5fd9b23bd9c8b0b58dafd223ef" alt="Espresso">
+        <div class="menu-body">
+          <div>
+            <div class="meta-top">
+              <h3>Signature Espresso</h3>
+              <div class="price">₹120</div>
+            </div>
+            <div class="desc">Rich double shot with crema — bold chocolate and caramel notes. Perfect straight or with milk.</div>
+          </div>
+          <div class="card-footer">
+            <div class="badge">Espresso</div>
+            <a href="#" class="btn-order">Order</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 2 -->
+      <article class="menu-card">
+        <img class="menu-media" src="https://images.unsplash.com/photo-1498804103079-a6351b050096?q=80&w=1200&auto=format&fit=crop&s=2f9ff6b7a8b7fc3c3f6f4b7b3f9c0baf" alt="Cappuccino">
+        <div class="menu-body">
+          <div>
+            <div class="meta-top">
+              <h3>Classic Cappuccino</h3>
+              <div class="price">₹140</div>
+            </div>
+            <div class="desc">Velvety milk foam with a balanced espresso base — a café favorite.</div>
+          </div>
+          <div class="card-footer">
+            <div class="badge">Hot</div>
+            <a href="#" class="btn-order">Order</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 3 -->
+      <article class="menu-card">
+        <img class="menu-media" src="https://myeverydaytable.com/wp-content/uploads/ICEDLATTE_0_4.jpg" alt="Iced Latte">
+        <div class="menu-body">
+          <div>
+            <div class="meta-top">
+              <h3>Iced Latte</h3>
+              <div class="price">₹160</div>
+            </div>
+            <div class="desc">Chilled espresso with milk and ice — smooth and refreshing for warm days.</div>
+          </div>
+          <div class="card-footer">
+            <div class="badge">Cold</div>
+            <a href="#" class="btn-order">Order</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 4 -->
+      <article class="menu-card">
+        <img class="menu-media" src="https://www.foodandwine.com/thmb/psYK-bh5rZnesGirNCB7fU135ro=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/glazed-cinnamon-rolls-with-pecan-swirls-FT-RECIPE0324-70223d05d0ce4dfb87df5bcb76ad8b20.jpg" alt="Cinnamon Roll">
+        <div class="menu-body">
+          <div>
+            <div class="meta-top">
+              <h3>Cinnamon Roll</h3>
+              <div class="price">₹100</div>
+            </div>
+            <div class="desc">Warm, sticky and soft — glazed to perfection. Great with any hot drink.</div>
+          </div>
+          <div class="card-footer">
+            <div class="badge">Pastry</div>
+            <a href="#" class="btn-order">Order</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 5 -->
+      <article class="menu-card">
+        <img class="menu-media" src="https://www.foodandwine.com/thmb/2tI8aL1Z8hKhfV48_c8b6uWG-TQ=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Iced-Matcha-Latte-FT-RECIPE0622-2000-9c2e116d3bc54bdaacda10e62e8e0205.jpg" alt="Matcha">
+        <div class="menu-body">
+          <div>
+            <div class="meta-top">
+              <h3>Matcha Latte</h3>
+              <div class="price">₹170</div>
+            </div>
+            <div class="desc">Ceremonial-grade matcha with steamed milk — earthy, slightly sweet and energizing.</div>
+          </div>
+          <div class="card-footer">
+            <div class="badge">Special</div>
+            <a href="#" class="btn-order">Order</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 6 -->
+      <article class="menu-card">
+        <img class="menu-media" src="https://i0.wp.com/melscoffeetravels.com/wp-content/uploads/2023/10/IMG_1565-scaled.jpg?fit=2560%2C1706&ssl=1" alt="Cold Brew">
+        <div class="menu-body">
+          <div>
+            <div class="meta-top">
+              <h3>Cold Brew</h3>
+              <div class="price">₹180</div>
+            </div>
+            <div class="desc">Slow-steeped for a smooth, low-acid cup. Serve over ice with a twist of citrus.</div>
+          </div>
+          <div class="card-footer">
+            <div class="badge">Cold</div>
+            <a href="#" class="btn-order">Order</a>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    
+    <div style="margin-top:30px; display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap;">
+     <a href="reservation" style="background:var(--accent);color:#fff;padding:10px 14px;border-radius:10px;font-weight:700;">Reserve a table</a>
+    </div>
+  </main>
+
+  <footer>
+    <div class="foot-inner">
+      <div>
+        <div style="font-weight:700;font-size:16px">Hot Coffee</div>
+        <small>© <span id="year"></span> Hot Coffee. All rights reserved.</small>
+      </div>
+      <div style="color:#d6c6b8; font-size:13px;">Follow us: Instagram • Facebook • Pinterest</div>
+    </div>
+  </footer>
+
+
+</body>
+</html>

@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+     <link rel="icon" type="image/x-icon" href="https://hotcoffee-html.themerex.net/images/favicon.png" />
+  <title>Hot Coffee — Blog</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --accent:#6b4a33;
+      --muted:#7b6a65;
+      --bg:#faf7f3;
+      --card-bg:#fffdfb;
+      --radius:12px;
+      --shadow: 0 12px 30px rgba(15,12,10,0.06);
+      --max-width:1150px;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:"Poppins",system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+      background:var(--bg);
+      color:#222;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.5;
+    }
+    a{color:inherit;text-decoration:none}
+
+ /* Header */
+    .header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:18px 6vw;
+      background:#fff;
+      border-bottom:1px solid #eee;
+      position:sticky;
+      top:0;
+      z-index:50;
+    }
+    .logo{
+        width: 120px;
+        height: 30px;
+        display:flex;
+        align-items:center;
+        gap:12px
+    }
+
+    nav.nav{
+      display:flex;
+      gap:26px;
+      align-items:center;
+      padding:0;
+      margin:0;
+    }
+    nav.nav a{
+      text-decoration:none;
+      color:#2b2b2b;
+      font-weight:600;
+      font-size:15px;
+      padding:6px 0;
+      position:relative;
+    }
+    nav.nav a.active::after{
+      content:"";
+      position:absolute;
+      left:0;
+      right:0;
+      bottom:-10px;
+      height:3px;
+      width:50%;
+      margin:0 auto;
+      background:var(--accent);border-radius:3px;
+    }
+
+    .cart{
+      text-align:right;
+      font-size:13px;
+      color:#222
+    }
+    .cart .icon
+    {
+      font-size:20px;
+      display:block;
+      margin-bottom:
+      4px
+    }
+    .cart small{
+      display:block;
+      color:var(--muted);
+      font-weight:600;
+      font-size:11px
+    } /* Header */
+    .header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:18px 6vw;
+      background:#fff;
+      border-bottom:1px solid #eee;
+      position:sticky;
+      top:0;
+      z-index:50;
+    }
+    .logo{
+        width: 120px;
+        height: 30px;
+        display:flex;
+        align-items:center;
+        gap:12px
+    }
+
+    nav.nav{
+      display:flex;
+      gap:26px;
+      align-items:center;
+      padding:0;
+      margin:0;
+    }
+    nav.nav a{
+      text-decoration:none;
+      color:#2b2b2b;
+      font-weight:600;
+      font-size:15px;
+      padding:6px 0;
+      position:relative;
+    }
+    nav.nav a.active::after{
+      content:"";
+      position:absolute;
+      left:0;
+      right:0;
+      bottom:-10px;
+      height:3px;
+      width:50%;
+      margin:0 auto;
+      background:var(--accent);border-radius:3px;
+    }
+
+    .cart{
+      text-align:right;
+      font-size:13px;
+      color:#222
+    }
+    .cart .icon
+    {
+      font-size:20px;
+      display:block;
+      margin-bottom:
+      4px
+    }
+    .cart small{
+      display:block;
+      color:var(--muted);
+      font-weight:600;
+      font-size:11px
+    }
+/* main */
+    .blog-banner{
+      background:linear-gradient(rgba(20,18,16,0.24), rgba(20,18,16,0.12)), url("https://hotcoffee-html.themerex.net/images/top_bg_1.jpg");
+      background-size:cover;
+      background-position:center;
+      color:#fff;
+      padding:64px 6vw;
+    }
+    .blog-banner .wrap{
+       max-width:var(--max-width); 
+       margin:0 auto; 
+       display:flex; 
+       justify-content:space-between; 
+       gap:24px; 
+       align-items:center; 
+      }
+    .blog-banner h1{
+       margin:0; 
+       font-family:"Playfair Display";
+       font-size:40px; 
+       line-height:1; 
+       color: #453e3c;
+       margin-left: 90px; 
+      }
+    .blog-banner p{ 
+      margin:8px 0 0 0; 
+      max-width:640px; 
+      opacity:0.95;
+      color: #453e3c; 
+      margin-left: 90px; 
+    }
+
+    .container{ 
+      max-width:var(--max-width); 
+      margin:36px auto; 
+      padding:0 6vw; 
+      display:grid; 
+      grid-template-columns: 1fr 320px; 
+      gap:28px; 
+      align-items:start; }
+
+    .posts-grid{ 
+      display:grid; 
+      grid-template-columns:repeat(2,1fr);
+       gap:22px; }
+    .post-card{
+      background:var(--card-bg);
+      border-radius:var(--radius);
+      overflow:hidden;
+      box-shadow:var(--shadow);
+      display:flex;
+      flex-direction:column;
+      transition:transform .18s ease, box-shadow .18s ease;
+    }
+    .post-card:hover{
+       transform:translateY(-6px); 
+       box-shadow:0 20px 50px rgba(15,12,10,0.12); 
+      }
+    .post-media{ 
+      width:100%; 
+      height:180px; 
+      object-fit:cover;
+       display:block; }
+    .post-body{
+       padding:16px; 
+       display:flex; 
+       flex-direction:column;
+       gap:10px;
+        flex:1;
+       }
+    .post-meta{ 
+      display:flex;
+       gap:12px; 
+       align-items:center;
+        font-size:13px;
+         color:var(--muted); 
+        }
+    .post-title{
+      margin:0; 
+      font-family:"Playfair Display";
+       font-size:20px; 
+      }
+    .post-excerpt{ 
+      margin:0; 
+      color:#444;
+       font-size:15px;
+        min-height:42px;
+       }
+    .read-more{ 
+      margin-top:auto;
+       display:inline-block; 
+       color:var(--accent); 
+       font-weight:700; 
+      }
+
+ 
+    aside.sidebar{ 
+      background:#fff;
+      border-radius:12px; 
+      padding:16px; 
+      box-shadow:var(--shadow); 
+      position:sticky; 
+      top:86px; 
+      height:fit-content; 
+    }
+    .search input{ 
+      width:100%; 
+      padding:10px 12px; 
+      border-radius:8px;
+      border:1px solid #eee; 
+      font-size:14px; 
+    }
+    .widget{ 
+      margin-top:18px;
+     }
+    .widget h4{ 
+      margin:0 0 10px 0;
+      font-size:16px; 
+    }
+    .categories{ 
+      display:flex; 
+      flex-direction:column;
+      gap:8px; 
+    }
+    .cat a{ 
+      padding:8px 10px; 
+      border-radius:8px; 
+      background:#fff9f6;
+       font-weight:600; 
+       font-size:14px; 
+       display:inline-block; 
+       color:var(--accent); 
+      }
+    .recent li{ 
+      list-style:none;
+      padding:8px 0;
+       border-bottom:1px dashed #f4efe9; 
+       font-size:14px;
+       }
+    .tags{ 
+      display:flex; 
+      gap:8px; 
+      flex-wrap:wrap; 
+    }
+    .tag{
+       background:#fff6e8; 
+       color:var(--accent); 
+       padding:6px 10px; 
+       border-radius:999px; 
+       font-weight:700; 
+       font-size:13px; 
+      }
+
+    .pagination{ 
+      display:flex; 
+      gap:8px; 
+      margin-top:18px; 
+      align-items:center; 
+    }
+    .page-btn{ 
+      padding:8px 12px; 
+      border-radius:8px; 
+      background:#fff; 
+      border:1px solid #eee; 
+      cursor:pointer; 
+      font-weight:700; }
+
+    footer{ 
+      margin-top:48px; 
+      background:#1b1b1b; 
+      color:#fff; 
+      padding:30px 6vw; 
+      border-top:4px solid rgba(214,181,138,0.10);
+     }
+    .foot-inner{ max-width:var(--max-width); margin:0 auto; display:flex; justify-content:space-between; align-items:center; gap:20px; }
+    footer small{ color:#d6c6b8; }
+
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="logo">
+      <img src="https://hotcoffee-html.themerex.net/images/alternative-logo.png" alt="Hot Coffee Logo">
+    </div>
+      <nav class="nav" aria-label="Main navigation">
+        <a href="/" >Home</a>
+        <a href="reservation">Reservations</a>
+        <a href="menu">Menu</a>
+        <a href="blog"class="active">Blog</a>
+        <a href="features">Features</a>
+        <a href="contact">Contacts</a>
+      </nav>
+
+    <div style="display:flex;align-items:center;gap:12px">
+      <div class="cart" aria-hidden="true">
+        <span class="icon">🛒</span>
+        <strong>YOUR CART</strong>
+        <small>0 ITEMS — $0.00</small>
+      </div>
+    </div>
+  </header>
+
+  <section class="blog-banner" >
+    <div class="wrap">
+      <div>
+        <h1>From our baristas</h1>
+        <p>Articles about coffee, brewing tips, behind-the-scenes stories and seasonal recipes — written by our team and friends.</p>
+      </div>
+      <div style="text-align:right">
+        <div style="background:rgba(255,255,255,0.06);padding:12px 18px;border-radius:12px;color: #453e3c;">Latest: <strong style="color: #453e3c;">Cold brew guide</strong></div>
+      </div>
+    </div>
+  </section>
+
+  <main class="container">
+ 
+    <section>
+      <div class="posts-grid">
+
+        <article class="post-card">
+          <img class="post-media" src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=1200&auto=format&fit=crop&s=8bcd0cad4f1b21f0b69f7a7d7f2d1b0b" alt="beans">
+          <div class="post-body">
+            <div class="post-meta"><span>Sep 1, 2025</span> • <span>by <strong>Hot Coffee</strong></span></div>
+            <h3 class="post-title">How we roast: from farm to cup</h3>
+            <p class="post-excerpt">We visit partner farms and roast small batches to highlight the best tasting notes. Learn our process and what to look for when buying beans.</p>
+            <a class="read-more" href="#">Read more →</a>
+          </div>
+        </article>
+
+        <article class="post-card">
+          <img class="post-media" src="https://images.unsplash.com/photo-1541167760496-1628856ab772?q=80&w=1200&auto=format&fit=crop&s=3c27fda2a4e065999b8b6f4d3c0b7b18" alt="coffee cup">
+          <div class="post-body">
+            <div class="post-meta"><span>Aug 22, 2025</span> • <span>by <strong>Barista Team</strong></span></div>
+            <h3 class="post-title">The perfect pour-over (step by step)</h3>
+            <p class="post-excerpt">A simple, repeatable method for consistent pour-over coffee. We cover grind, water temp, bloom and pour technique.</p>
+            <a class="read-more" href="#">Read more →</a>
+          </div>
+        </article>
+
+        <article class="post-card">
+          <img class="post-media" src="https://images.unsplash.com/photo-1467003909585-2f8a72700288?q=80&w=1200&auto=format&fit=crop&s=8c0d3d6f4e6a9b3a2d3f6c2b1a0e9f7b" alt="latte art">
+          <div class="post-body">
+            <div class="post-meta"><span>Jul 10, 2025</span> • <span>by <strong>Guest</strong></span></div>
+            <h3 class="post-title">Latte art for beginners</h3>
+            <p class="post-excerpt">Start with a steady pitcher, proper milk texture and a calm wrist — here are three easy designs to practice at home.</p>
+            <a class="read-more" href="#">Read more →</a>
+          </div>
+        </article>
+
+        <article class="post-card">
+          <img class="post-media" src="https://images.unsplash.com/photo-1529070538774-1843cb3265df?q=80&w=1200&auto=format&fit=crop&s=19f4f3b6b8b3f8c7d1a2f3c4b5d6e7f8" alt="cold brew">
+          <div class="post-body">
+            <div class="post-meta"><span>Jun 30, 2025</span> • <span>by <strong>Hot Coffee</strong></span></div>
+            <h3 class="post-title">Cold brew: recipe & tips</h3>
+            <p class="post-excerpt">Make smooth, low-acid cold brew at home — we share ratios, steep times and flavor tweaks for bright or chocolatey profiles.</p>
+            <a class="read-more" href="#">Read more →</a>
+          </div>
+        </article>
+      </div>
+
+
+      <div style="margin-top:22px; display:flex; justify-content:center;">
+        <div class="pagination">
+          <button class="page-btn">← Prev</button>
+          <button class="page-btn">1</button>
+          <button class="page-btn">2</button>
+          <button class="page-btn">3</button>
+          <button class="page-btn">Next →</button>
+        </div>
+      </div>
+    </section>
+
+ 
+    <aside class="sidebar" aria-label="Sidebar">
+
+      <div class="search">
+        <h4>Search</h4>
+        <form action="#" onsubmit="return false;">
+          <input type="text" placeholder="Search articles..." aria-label="Search articles">
+        </form>
+      </div>
+
+      <div class="widget">
+        <h4>Categories</h4>
+        <div class="categories">
+          <a class="cat" href="#">Brewing</a>
+          <a class="cat" href="#">Beans</a>
+          <a class="cat" href="#">Recipes</a>
+          <a class="cat" href="#">Shop News</a>
+        </div>
+      </div>
+
+      <div class="widget">
+        <h4>Recent posts</h4>
+        <ul class="recent" style="margin:0;padding:0;">
+          <li><a href="#">Cold brew: recipe & tips</a></li>
+          <li><a href="#">Latte art for beginners</a></li>
+          <li><a href="#">The perfect pour-over</a></li>
+        </ul>
+      </div>
+
+      <div class="widget">
+        <h4>Tags</h4>
+        <div class="tags">
+          <span class="tag">#pour-over</span>
+          <span class="tag">#espresso</span>
+          <span class="tag">#coldbrew</span>
+          <span class="tag">#roasting</span>
+        </div>
+      </div>
+
+      <div class="widget">
+        <h4>Newsletter</h4>
+        <p style="margin:0 0 8px 0;color:var(--muted);font-size:14px;">Get weekly tips & offers.</p>
+        <form action="#" onsubmit="return false;">
+          <input type="email" placeholder="you@domain.com" style="width:100%;padding:10px;border-radius:8px;border:1px solid #eee;margin-bottom:8px;">
+          <button style="width:100%;background:var(--accent);color:#fff;padding:10px;border-radius:8px;border:none;font-weight:700;cursor:pointer">Subscribe</button>
+        </form>
+      </div>
+    </aside>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="foot-inner">
+      <div>
+        <div style="font-weight:700;font-size:16px">Hot Coffee</div>
+        <small>© <span id="year"></span> Hot Coffee. All rights reserved.</small>
+      </div>
+      <div style="color:#d6c6b8; font-size:13px;">Follow us: Instagram • Facebook • Pinterest</div>
+    </div>
+  </footer>
+
+ 
+
+</body>
+</html>

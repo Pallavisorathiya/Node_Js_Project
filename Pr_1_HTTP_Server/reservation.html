@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="https://hotcoffee-html.themerex.net/images/favicon.png" />
+  <title>Hot Coffee — Reservation </title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --accent: #6b4a33;
+      --muted: #7b6a65;
+      --bg: #faf7f3;
+      --card-bg: #fffdfb;
+      --table-border: #f0ebe8;
+      --available: #cfead9;
+      --booked: #ffd7d7;
+      --few: #fff3cc;
+      --shadow: 0 8px 24px rgba(0,0,0,0.06);
+      --radius: 10px;
+      --max-width: 1150px;
+    }
+
+    * { box-sizing: border-box; }
+    html,body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: "Poppins", system-ui, Arial, sans-serif;
+      background: var(--bg);
+      color: #222;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height: 1.4;
+    }
+    a { color: inherit; text-decoration: none; }
+
+ /* Header */
+    .header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:18px 6vw;
+      background:#fff;
+      border-bottom:1px solid #eee;
+      position:sticky;
+      top:0;
+      z-index:50;
+    }
+    .logo{
+        width: 120px;
+        height: 30px;
+        display:flex;
+        align-items:center;
+        gap:12px
+    }
+
+    nav.nav{
+      display:flex;
+      gap:26px;
+      align-items:center;
+      padding:0;
+      margin:0;
+    }
+    nav.nav a{
+      text-decoration:none;
+      color:#2b2b2b;
+      font-weight:600;
+      font-size:15px;
+      padding:6px 0;
+      position:relative;
+    }
+    nav.nav a.active::after{
+      content:"";
+      position:absolute;
+      left:0;
+      right:0;
+      bottom:-10px;
+      height:3px;
+      width:50%;
+      margin:0 auto;
+      background:var(--accent);border-radius:3px;
+    }
+
+    .cart{
+      text-align:right;
+      font-size:13px;
+      color:#222
+    }
+    .cart .icon
+    {
+      font-size:20px;
+      display:block;
+      margin-bottom:
+      4px
+    }
+    .cart small{
+      display:block;
+      color:var(--muted);
+      font-weight:600;
+      font-size:11px
+    }
+
+    /* banner*/
+    .re-banner{
+      background-image: linear-gradient(rgba(20,18,16,0.24), rgba(20,18,16,0.12)),
+        url('https://hotcoffee-html.themerex.net/images/top_bg_1.jpg');
+      background-size: cover;
+      background-position: center;
+      min-height: 40vh;
+      display:flex; align-items:center; padding: 40px 6vw; color: #fff;
+    }
+    .re-banner .wrap {
+       max-width: var(--max-width); 
+       width:100%;
+      }
+    .re-banner .title-lg { 
+      color: #453e3c;
+      font-size: 45px;
+       font-weight:600;
+        margin:0 0 6px;
+        margin-left: 50px;
+     
+      }
+
+    main.container {
+      max-width: var(--max-width);
+      margin: 28px auto;
+      padding: 0 6vw;
+    }
+
+    .cal-heading {
+      display:flex; 
+      justify-content:space-between;
+       align-items:center; 
+       margin-bottom:12px;
+    }
+    .cal-heading .legend {
+       font-size:13px; 
+       color:var(--muted);
+       display:flex; 
+       gap:12px; 
+       align-items:center; 
+       flex-wrap:wrap; }
+
+    .legend .swatch { 
+      width:10px;
+      height:10px; 
+      border-radius:2px; 
+      display:inline-block; 
+      vertical-align:middle; 
+      margin-right:6px; }
+
+    /* Time-slot table */
+    .slot-table {
+      width:100%;
+      border-collapse:collapse;
+      background:#fff;
+      border-radius: var(--radius);
+      overflow:hidden;
+      box-shadow: var(--shadow);
+    }
+    .slot-table thead th {
+      text-align:left;
+      padding:12px 14px;
+      background:#f8f6f4;
+      font-weight:700;
+      border-bottom:1px solid var(--table-border);
+    }
+    .slot-table thead th.center { text-align:center; background:#faf9f8; border-left:1px solid var(--table-border); }
+    .slot-table tbody td {
+      padding:10px; text-align:center; border-left:1px solid #f7f3f1;
+    }
+    .slot-table tbody td.time-col {
+      text-align:left; padding:12px 14px; font-weight:700; border-top:1px solid var(--table-border);
+    }
+    .slot-table tbody tr td:first-child { border-left: none; }
+
+    .bookings-table {
+      width:100%; border-collapse:collapse; margin-top:12px;
+      background:#fff; border-radius:8px; overflow:hidden; box-shadow: var(--shadow);
+    }
+    .bookings-table thead th {
+      padding:12px 14px; background:#f8f6f4; border-bottom:1px solid var(--table-border); text-align:left;
+    }
+    .bookings-table tbody td { padding:12px 14px; border-top:1px solid var(--table-border); }
+
+    .note { margin-top:10px; font-size:13px; color:var(--muted); }
+
+    /* Footer */
+    footer.site-footer {
+      margin-top:36px;
+      background:#1b1b1b;
+      color:#fff;
+      padding:24px 6vw;
+      border-top:4px solid rgba(214,181,138,0.10);
+    }
+    .foot-inner { max-width: var(--max-width); margin:0 auto; display:flex; justify-content:space-between; align-items:center; gap:20px; }
+
+  
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="logo">
+      <img src="https://hotcoffee-html.themerex.net/images/alternative-logo.png" alt="Hot Coffee Logo">
+    </div>
+      <nav class="nav" aria-label="Main navigation">
+        <a href="/" >Home</a>
+        <a href="reservation"class="active">Reservations</a>
+        <a href="menu">Menu</a>
+        <a href="blog">Blog</a>
+        <a href="features">Features</a>
+        <a href="contact">Contacts</a>
+      </nav>
+
+    <div style="display:flex;align-items:center;gap:12px">
+      <div class="cart" aria-hidden="true">
+        <span class="icon">🛒</span>
+        <strong>YOUR CART</strong>
+        <small>0 ITEMS — $0.00</small>
+      </div>
+    </div>
+  </header>
+
+  <section class="re-banner">
+    <div class="wrap">
+      <h1 class="title-lg">Reserve a table</h1>
+     
+  </section>
+
+  <main class="container">
+    <section id="calendar">
+      <div class="cal-heading">
+        <div style="font-size:18px;font-weight:700;">Week view — Time slots</div>
+        <div class="legend">
+          <span style="display:flex;align-items:center;gap:6px"><span class="swatch" style="background:var(--available)"></span>Available</span>
+          <span style="display:flex;align-items:center;gap:6px"><span class="swatch" style="background:var(--booked)"></span>Booked</span>
+          <span style="display:flex;align-items:center;gap:6px"><span class="swatch" style="background:var(--few)"></span>Few seats</span>
+        </div>
+      </div>
+
+      <table class="slot-table" aria-describedby="legend">
+        <thead>
+          <tr>
+            <th>Time / Day</th>
+            <th class="center">Mon</th>
+            <th class="center">Tue</th>
+            <th class="center">Wed</th>
+            <th class="center">Thu</th>
+            <th class="center">Fri</th>
+            <th class="center">Sat</th>
+            <th class="center">Sun</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="time-col">10:00 AM</td>
+            <td style="background:var(--available);">Available</td>
+            <td style="background:var(--booked);">Booked</td>
+            <td style="background:var(--available);">Available</td>
+            <td style="background:var(--few);">Few seats</td>
+            <td style="background:var(--available);">Available</td>
+            <td style="background:var(--booked);">Booked</td>
+            <td style="background:var(--available);">Available</td>
+          </tr>
+
+          <tr>
+            <td class="time-col">12:00 PM</td>
+            <td style="background:var(--booked);">Booked</td>
+            <td style="background:var(--booked);">Booked</td>
+            <td style="background:var(--available);">Available</td>
+            <td style="background:var(--few);">Few seats</td>
+            <td style="background:var(--available);">Available</td>
+            <td style="background:var(--booked);">Booked</td>
+            <td style="background:var(--available);">Available</td>
+          </tr>
+
+          <tr>
+            <td class="time-col">02:00 PM</td>
+            <td style="background:var(--available);">Available</td>
+            <td style="background:var(--available);">Available</td>
+            <td style="background:var(--few);">Few seats</td>
+            <td style="background:var(--booked);">Booked</td>
+            <td style="background:var(--booked);">Booked</td>
+            <td style="background:var(--available);">Available</td>
+            <td style="background:var(--available);">Available</td>
+          </tr>
+
+          <tr>
+            <td class="time-col">04:00 PM</td>
+            <td style="background:var(--few);">Few seats</td>
+            <td style="background:var(--available);">Available</td>
+            <td style="background:var(--available);">Available</td>
+            <td style="background:var(--booked);">Booked</td>
+            <td style="background:var(--booked);">Booked</td>
+            <td style="background:var(--few);">Few seats</td>
+            <td style="background:var(--available);">Available</td>
+          </tr>
+
+          <tr>
+            <td class="time-col">06:00 PM</td>
+            <td style="background:var(--booked);">Booked</td>
+            <td style="background:var(--booked);">Booked</td>
+            <td style="background:var(--booked);">Booked</td>
+            <td style="background:var(--booked);">Booked</td>
+            <td style="background:var(--booked);">Booked</td>
+            <td style="background:var(--booked);">Booked</td>
+            <td style="background:var(--booked);">Booked</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </section>
+
+    <section id="list" style="margin-top:26px;">
+      <h2 style="margin:0 0 8px 0; font-size:18px; font-weight:700;">Confirmed bookings </h2>
+
+      <table class="bookings-table" aria-labelledby="bookings">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Party</th>
+            <th>Contact</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Anita Patel</td>
+            <td>Sat, Sep 13 2025</td>
+            <td>12:00 PM</td>
+            <td>4</td>
+            <td>+91 98765 12345</td>
+          </tr>
+          <tr>
+            <td>Ravi Kumar</td>
+            <td>Sun, Sep 14 2025</td>
+            <td>06:00 PM</td>
+            <td>2</td>
+            <td>+91 99880 77665</td>
+          </tr>
+        </tbody>
+      </table>
+
+  
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="foot-inner">
+      <div>
+        <div style="font-weight:700; font-size:16px;">Hot Coffee</div>
+        <div style="color:#d6c6b8; font-size:13px;">© 2025 Hot Coffee. All rights reserved.</div>
+      </div>
+      <div style="color:#d6c6b8; font-size:13px;">Follow us: Instagram • Facebook • Pinterest</div>
+    </div>
+  </footer>
+</body>
+</html>

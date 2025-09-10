@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+     <link rel="icon" type="image/x-icon" href="https://hotcoffee-html.themerex.net/images/favicon.png" />
+     <title>Hot Coffee — Home</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Poppins:wght@300;400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --accent:#6b4a33;
+      --accent-2:#d6b58a;
+      --muted:#7b6a65;
+      --bg:#ffffff;
+      --card-bg:#fffdfb;
+      --radius:14px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:"Poppins",system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+      color:#2b2b2b;
+      background:#faf7f3;
+      line-height:1.4;
+    }
+
+    /* Header */
+    .header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:18px 6vw;
+      background:#fff;
+      border-bottom:1px solid #eee;
+      position:sticky;
+      top:0;
+      z-index:50;
+    }
+    .logo{
+        width: 120px;
+        height: 30px;
+        display:flex;
+        align-items:center;
+        gap:12px
+    }
+
+    nav.nav{
+      display:flex;
+      gap:26px;
+      align-items:center;
+      padding:0;
+      margin:0;
+    }
+    nav.nav a{
+      text-decoration:none;
+      color:#2b2b2b;
+      font-weight:600;
+      font-size:15px;
+      padding:6px 0;
+      position:relative;
+    }
+    nav.nav a.active::after{
+      content:"";position:absolute;left:0;right:0;bottom:-10px;height:3px;width:50%;margin:0 auto;background:var(--accent);border-radius:3px;
+    }
+
+    .cart{text-align:right;font-size:13px;color:#222}
+    .cart .icon{font-size:20px;display:block;margin-bottom:4px}
+    .cart small{display:block;color:var(--muted);font-weight:600;font-size:11px}
+
+
+    .banner{
+      background-image: linear-gradient(rgba(20,18,16,0.30),
+       rgba(20,18,16,0.22)),
+        url("https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=1800&auto=format&fit=crop&s=8bcd0cad4f1b21f0b69f7a7d7f2d1b0b");
+      background-position:center center;
+      background-size:cover;
+      min-height:72vh;
+      display:flex;
+      align-items:center;
+      padding:6vh 6vw;
+      color:white;
+    }
+    .banner-inner{max-width:1100px;display:grid;grid-template-columns:1fr 420px;gap:40px;align-items:center}
+    .banner-left h2{margin:0 0 10px 0;font-family:"Great Vibes";font-size:64px;line-height:0.9;text-shadow:0 6px 18px rgba(0,0,0,0.5)}
+    .banner-left h1{margin:0 0 18px 0;font-family:"Playfair Display";font-weight:900;font-size:64px;letter-spacing:1px;color:#fff;text-shadow:0 10px 30px rgba(0,0,0,0.55)}
+    .banner-left p{margin:0 0 22px 0;max-width:650px;color:#fff;font-size:16px;opacity:0.95}
+    .hero-ctas{display:flex;gap:14px}
+    .btn{display:inline-block;padding:12px 20px;border-radius:10px;text-decoration:none;font-weight:700;letter-spacing:0.3px}
+    .btn--primary{background:var(--accent);color:#fff;box-shadow:0 10px 24px rgba(107,74,51,0.20)}
+    .btn--ghost{background:transparent;color:#fff;border:2px solid rgba(255,255,255,0.22);backdrop-filter: blur(2px)}
+
+    .h-card{background:linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.92));border-radius:18px;padding:18px;display:flex;gap:14px;align-items:center;color:#2b2b2b;min-height:180px;box-shadow:0 10px 30px rgba(0,0,0,0.12)}
+    .h-card img{width:140px;height:140px;object-fit:cover;border-radius:12px;box-shadow:0 8px 18px rgba(0,0,0,0.12)}
+    .h-card .meta h3{margin:0;font-family:"Playfair Display";font-size:20px}
+    .h-card .meta p{margin:6px 0 0 0;color:var(--muted);font-size:14px}
+
+    /* Details */
+    .container{max-width:1150px;margin:40px auto;padding:0 6vw}
+    .about{display:flex;gap:28px;align-items:center;margin-bottom:28px}
+    .about .text{flex:1}
+    .about h3{margin:0 0 8px 0;font-size:22px;color:var(--accent)}
+    .about h2{margin:0 0 14px 0;font-family:"Playfair Display";font-size:34px}
+    .about p{margin:0;color:#4b4b4b}
+    .features{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:26px}
+    .card{background:var(--card-bg);border-radius:14px;padding:18px;box-shadow:0 8px 22px rgba(23,20,18,0.06);display:flex;gap:14px;align-items:flex-start}
+    .card .logo{width:64px;height:64px;border-radius:12px;background:linear-gradient(135deg,var(--accent-2),#fff);display:flex;align-items:center;justify-content:center;font-size:22px;color:var(--accent);font-weight:800}
+    .card h4{margin:0 0 8px 0;font-size:18px}
+    .card p{margin:0;color:var(--muted);font-size:14px}
+
+    /* Footer */
+    footer{margin-top:48px;background:#1b1b1b;color:#fff;padding:30px 6vw;border-top:4px solid rgba(214,181,138,0.10)}
+    footer .foot-inner{max-width:1150px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:20px}
+    footer small{color:#d6c6b8}
+
+   
+
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="logo">
+   
+      <img src="https://hotcoffee-html.themerex.net/images/alternative-logo.png" alt="Hot Coffee Logo">
+    </div>
+    
+
+    <!-- Desktop nav -->
+    <nav class="nav" aria-label="Main navigation">
+      <a href="/" class="active">Home</a>
+      <a href="reservation">Reservations</a>
+      <a href="menu">Menu</a>
+      <a href="blog">Blog</a>
+      <a href="features">Features</a>
+      
+      <a href="contact">Contacts</a>
+    </nav>
+
+    <div style="display:flex;align-items:center;gap:12px">
+      <div class="cart" aria-hidden="true">
+        <span class="icon">🛒</span>
+        <strong>YOUR CART</strong>
+        <small>0 ITEMS — $0.00</small>
+      </div>
+
+     
+    </div>
+  </header>
+
+  <section class="banner" role="banner">
+    <div class="banner-inner">
+      <div class="banner-left">
+        <h2>We Know</h2>
+        <h1>How To Make Your Life Awesome</h1>
+        <p>Hand-roasted beans, careful brewing and a warm environment — we help you enjoy better coffee every day. Explore seasonal blends, single origin roasts and barista-favourite recipes.</p>
+
+        <div class="hero-ctas">
+          <a href="#" class="btn btn--primary">Shop Beans</a>
+          <a href="#" class="btn btn--ghost">View Menu</a>
+        </div>
+      </div>
+
+      <div class="h-card" aria-hidden="false">
+        <img src="https://images.unsplash.com/photo-1541167760496-1628856ab772?q=80&w=1200&auto=format&fit=crop&s=3c27fda2a4e065999b8b6f4d3c0b7b18" alt="Cup of coffee">
+        <div class="meta">
+          <h3>Signature Blend</h3>
+          <p>Rich aroma, chocolate notes and a smooth finish. Perfect for espresso or pour-over.</p>
+          <div style="margin-top:10px;font-weight:700;color:var(--accent)">From $12 / 250g</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Details container -->
+  <main class="container" role="main">
+    <!-- About -->
+    <section class="about">
+      <div class="text">
+        <h3>About our coffee</h3>
+        <h2>Small batches. Big flavour.</h2>
+        <p>We partner with micro-roasters and ethical farms. Each batch is roasted to bring out the best character of the bean. Enjoy tasting notes like citrus, caramel and dark chocolate depending on the origin and roast.</p>
+      </div>
+      <div style="min-width:260px;text-align:right">
+        <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=800&auto=format&fit=crop&s=8bcd0cad4f1b21f0b69f7a7d7f2d1b0b" alt="beans" style="width:220px;border-radius:14px;box-shadow:0 8px 20px rgba(0,0,0,0.08)">
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features" aria-label="Highlights">
+      <article class="card">
+        <div class="logo">1</div>
+        <div><h4>Fresh Roasted</h4><p>Roasted weekly and shipped fast so your beans arrive at peak freshness.</p></div>
+      </article>
+
+      <article class="card">
+        <div class="logo">☕</div>
+        <div><h4>Barista Quality</h4><p>Recipes and grind guides included so you brew café-grade coffee at home.</p></div>
+      </article>
+
+      <article class="card">
+        <div class="logo">🌱</div>
+        <div><h4>Ethically Sourced</h4><p>Direct trade relationships with farmers who practice sustainable growing.</p></div>
+      </article>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="foot-inner">
+      <div>
+        <div style="font-weight:700;font-size:16px">Hot Coffee</div>
+        <small>© <span id="year"></span> Hot Coffee. All rights reserved.</small>
+      </div>
+      <div><small>Follow us: Instagram • Facebook • Pinterest</small></div>
+    </div>
+  </footer>
+
+
+  </script>
+</body>
+</html>
