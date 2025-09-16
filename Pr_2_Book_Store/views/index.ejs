@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="https://cdn.prod.website-files.com/60eab9eb8c8efbe05c772e58/60fbd62957f2fab4008490e5_%5B66%5Dfavicon.png">
+  <title>Book Store</title>
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+
+    /* Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 40px;
+      background: #fff;
+      border-bottom: 1px solid #eee;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .navbar .logo {
+      display: flex;
+      align-items: center;
+      font-weight: bold;
+      font-size: 20px;
+      color: #333;
+    }
+    .navbar .logo img {
+      height: 28px;
+      margin-right: 8px;
+    }
+    .navbar ul {
+      display: flex;
+      list-style: none;
+      gap: 20px;
+    }
+    .navbar ul li a {
+      text-decoration: none;
+      color: #444;
+      font-size: 15px;
+      transition: color 0.3s;
+    }
+    .navbar ul li a:hover {
+      color: #ff4b2b;
+    }
+    .navbar .btn {
+      padding: 8px 14px;
+      background: #e95352;
+      border: none;
+      border-radius: 4px;
+      color: white;
+      font-size: 14px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+    .navbar .btn:hover {
+      background: #e63e20;
+      transform: scale(1.05);
+    }
+
+  
+    .banner {
+      background: url('https://cdn.prod.website-files.com/66ab8282560ac2178fdcc6c8/6708b1d3e2f73cc8f50dc092_simple-flat-vector-background-with-books-glass%201.png') no-repeat center/cover;
+      position: relative;
+      color: white;
+      text-align: left;
+      padding: 100px 40px;
+    }
+    .banner::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+    }
+    .banner-content {
+      position: relative;
+      max-width: 700px;
+      z-index: 1;
+    }
+    .banner h1 {
+      font-size: 42px;
+      margin-bottom: 15px;
+      line-height: 1.2;
+    }
+    .bannerp {
+      font-size: 16px;
+      margin-bottom: 25px;
+    }
+  
+    .books-section {
+      padding: 40px;
+      background: #fdfdfd;
+    }
+    .books-section h2 {
+      font-size: 26px;
+      margin-bottom: 20px;
+      text-align: center;
+      color: #333;
+      position: relative;
+    }
+    .books-section h2::after {
+      content: "";
+      display: block;
+      width: 60px;
+      height: 3px;
+      background: #ff4b2b;
+      margin: 8px auto 0;
+      border-radius: 2px;
+    }
+
+    .books-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 28px;
+    }
+
+    .book-card {
+      background: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0px 2px 8px rgba(0,0,0,0.08);
+      transition: all 0.3s ease;
+      text-align: center;
+      padding-bottom: 15px;
+    }
+    .book-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0px 6px 18px rgba(0,0,0,0.15);
+    }
+    .book-card img {
+      width: 100%;
+      height: 290px;
+      /* object-fit: cover; */
+      border-bottom: 1px solid #eee;
+      border-radius: 8px 8px 0 0;
+    }
+    .book-info {
+      padding: 15px;
+    }
+    .book-info h3 {
+      font-size: 18px;
+      font-weight: bold;
+      margin: 10px 0 6px;
+      color: #222;
+      transition: color 0.3s;
+    }
+    .book-info h3:hover {
+      color: #ff4b2b;
+    }
+    .book-info p {
+      font-size: 14px;
+      color: #666;
+      margin: 3px 0;
+    }
+    .book-info p strong {
+      color: #333;
+    }
+    .book-footer {
+      margin-top: 12px;
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .price {
+      display: block;
+      font-weight: bold;
+      font-size: 15px;
+      margin-bottom: 8px;
+      color: #111;
+    }
+   .action-btns a {
+      text-decoration: none;
+      font-size: 13px;
+      padding: 6px 12px;
+      border-radius: 4px;
+      margin-left: 5px;
+      transition: 0.3s;
+    }
+    .edit-btn {
+      background: #09373c;
+      color: white;
+    }
+    .delete-btn {
+      background: #e95352;
+      color: white;
+    }
+    .edit-btn:hover { background: #005fa3; }
+    .delete-btn:hover { background: #a30000; }
+
+  .footer {
+  background: linear-gradient(180deg, #fafafa 0%, #f4f4f4 100%);
+  border-top: 1px solid #eee;
+  padding: 28px 20px;     
+  margin-top: 40px;
+}
+
+.footer .container {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(220px, 1fr));
+  gap: 18px;             
+  align-items: start;     }
+
+.footer .container > div {
+  padding: 0 12px;
+}
+
+.footer .about {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer .logo-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 130px;
+}
+
+.footer .socials a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 6px;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+
+.footer .contact,
+.footer .subscribe {
+  padding-top: 4px;
+}
+
+.footer .bottom {
+  margin-top: 22px;
+  border-top: 1px solid #eee;
+  padding-top: 16px;
+  text-align: center;
+  color: #777;
+  font-size: 13px;
+}
+ 
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <nav class="navbar">
+    <div class="logo">
+      <a href="/" style="display:flex; align-items:center; text-decoration:none; color:inherit;">
+        <img src="https://cdn.prod.website-files.com/60eab9eb8c8efbe05c772e58/60eacd5b72833f18fb6be983_%5B1%5Dlogo_dark.svg" alt="Logo">
+      </a>
+    </div>
+    <a href="/add-book" class="btn">+ Add Book</a>
+  </nav>
+
+
+  <!-- Hero Banner -->
+  <section class="banner">
+    <div class="banner-content">
+      <h1>You're only one book away from a good mood</h1>
+      <p>Edition is a template to help you create your online store quickly — easy to customize and pleasant to use.</p>
+     
+    </div>
+  </section>
+
+  <!-- Books Section -->
+  <section class="books-section">
+    <h2>All Books</h2>
+    <div class="books-grid">
+      <!-- Example EJS loop; replace with server data as needed -->
+      <% if (books && books.length) { %>
+        <% books.forEach(function(book) { %>
+          <div class="book-card">
+            <img src="<%= book.img %>" alt="<%= book.title %>">
+            <div class="book-info">
+              <h3><%= book.title %></h3>
+              <p><em>Author:</em> <strong><%= book.author %></strong></p>
+              <p><em>Publisher:</em> <strong><%= book.publisher %></strong></p>
+             <span class="price"><%= new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(book.price) %>
+</span>
+
+              <div class="action-btns">
+                <a href="/edit-book/<%= book.id %>" class="edit-btn">Edit</a>
+                <a href="/delete-book/<%= book.id %>" class="delete-btn">Delete</a>
+              </div>
+            </div>
+          </div>
+        <% }) %>
+      <% } else { %>
+        <p>No books found. <a href="/add-book">Add your first book</a></p>
+      <% } %>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="about">
+        <div class="logo-row">
+          <img src="https://cdn.prod.website-files.com/60eab9eb8c8efbe05c772e58/60eacd5b72833f18fb6be983_%5B1%5Dlogo_dark.svg" alt="Logo">
+         
+        </div>
+        <p style="margin-top:10px;">Discover, read and collect your favorite books. Fast shipping across India and easy returns.</p>
+       
+      </div>
+        <div class="contact">
+        <h4>Contact</h4>
+        <p>123 Book Street, Mumbai</p>
+        <p>Phone: +91 98765 43210</p>
+        <p>Email: support@bookstore.com</p>
+      </div>
+
+      <div class="subscribe">
+        <h4>Newsletter</h4>
+        <p>Get updates on new arrivals and offers.</p>
+        <form onsubmit="subscribe(event)">
+          <input type="email" id="subscriberEmail" placeholder="Your email address" required>
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="bottom">
+      © <span id="year"></span> Book Store — All rights reserved.
+    </div>
+  </footer>
+
+
+
+</body>
+</html>

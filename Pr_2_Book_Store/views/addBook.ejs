@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="https://cdn.prod.website-files.com/60eab9eb8c8efbe05c772e58/60fbd62957f2fab4008490e5_%5B66%5Dfavicon.png">
+  <title>Add Book</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f9f9f9;
+      color: #333;
+    }
+     
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 40px;
+      background: #fff;
+      border-bottom: 1px solid #eee;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .navbar .logo {
+      display: flex;
+      align-items: center;
+      font-weight: bold;
+      font-size: 20px;
+      color: #333;
+    }
+    .navbar .logo img {
+      height: 28px;
+      margin-right: 8px;
+    }
+    .navbar ul {
+      display: flex;
+      list-style: none;
+      gap: 20px;
+    }
+    .navbar ul li a {
+      text-decoration: none;
+      color: #444;
+      font-size: 15px;
+      transition: color 0.3s;
+    }
+    .navbar ul li a:hover {
+      color: #ff4b2b;
+    }
+    .navbar .btn {
+      padding: 8px 14px;
+      background: #e95352;
+      border: none;
+      border-radius: 4px;
+      color: white;
+      font-size: 14px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+    .navbar .btn:hover {
+      background: #e63e20;
+      transform: scale(1.05);
+    }
+
+    .container {
+      max-width: 500px;
+      margin: 50px auto;
+      background: #fff;
+      padding: 25px;
+      border-radius: 8px;
+      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #222;
+    }
+
+    form label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 6px;
+      margin-top: 14px;
+    }
+
+    form input,
+    form textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+      transition: border 0.3s;
+    }
+
+    form input:focus,
+    form textarea:focus {
+      border-color: #ff4b2b;
+      outline: none;
+    }
+
+    textarea {
+      resize: none;
+      min-height: 80px;
+    }
+
+    .btn-submit {
+      width: 100%;
+      margin-top: 20px;
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      background: #e95352;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn-submit:hover {
+      background: #e63e20;
+    }
+
+    .links {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .links a {
+      margin: 0 10px;
+      text-decoration: none;
+      color: #ff4b2b;
+      font-weight: bold;
+    }
+
+    .links a:hover {
+      text-decoration: underline;
+    }
+    
+  .footer {
+  background: linear-gradient(180deg, #fafafa 0%, #f4f4f4 100%);
+  border-top: 1px solid #eee;
+  padding: 28px 20px;     
+  margin-top: 40px;
+}
+
+.footer .container {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(220px, 1fr));
+  gap: 18px;             
+  align-items: start;     }
+
+.footer .container > div {
+  padding: 0 12px;
+}
+
+.footer .about {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer .logo-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 130px;
+}
+
+.footer .socials a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 6px;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+
+.footer .contact,
+.footer .subscribe {
+  padding-top: 4px;
+}
+
+.footer .bottom {
+  margin-top: 22px;
+  border-top: 1px solid #eee;
+  padding-top: 16px;
+  text-align: center;
+  color: #777;
+  font-size: 13px;
+}
+  </style>
+</head>
+
+<body>
+
+
+<!-- Header -->
+<nav class="navbar">
+  <div class="logo">
+    <a href="/" style="display:flex; align-items:center; text-decoration:none; color:inherit;">
+      <img src="https://cdn.prod.website-files.com/60eab9eb8c8efbe05c772e58/60eacd5b72833f18fb6be983_%5B1%5Dlogo_dark.svg" alt="Logo">
+    </a>
+  </div>
+  <a href="/add-book" class="btn">+ Add Book</a>
+</nav>
+
+
+  <div class="container">
+    <h2>Add Book Details</h2>
+    <form action="/add-book" method="post">
+      <label for="id">Id</label>
+      <input type="number" name="id" id="id" required>
+
+      <label for="title">Title</label>
+      <input type="text" name="title" id="title" required>
+
+      <label for="author">Author</label>
+      <input type="text" name="author" id="author" required>
+
+      <label for="price">Price</label>
+      <input type="text" name="price" id="price" required>
+
+      <label for="img">Image URL</label>
+      <input type="text" name="img" id="img">
+
+      <label for="publisher: ">Publisher: </label>
+      <textarea name="publisher" id="publisher"></textarea>
+
+      <button type="submit" class="btn-submit">Add Book</button>
+    </form>
+  </div>
+  
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="about">
+        <div class="logo-row">
+          <img src="https://cdn.prod.website-files.com/60eab9eb8c8efbe05c772e58/60eacd5b72833f18fb6be983_%5B1%5Dlogo_dark.svg" alt="Logo">
+         
+        </div>
+        <p style="margin-top:10px;">Discover, read and collect your favorite books. Fast shipping across India and easy returns.</p>
+       
+      </div>
+        <div class="contact">
+        <h4>Contact</h4>
+        <p>123 Book Street, Mumbai</p>
+        <p>Phone: +91 98765 43210</p>
+        <p>Email: support@bookstore.com</p>
+      </div>
+
+      <div class="subscribe">
+        <h4>Newsletter</h4>
+        <p>Get updates on new arrivals and offers.</p>
+        <form onsubmit="subscribe(event)">
+          <input type="email" id="subscriberEmail" placeholder="Your email address" required>
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="bottom">
+      © <span id="year"></span> Book Store — All rights reserved.
+    </div>
+  </footer>
+</body>
+
+</html>
