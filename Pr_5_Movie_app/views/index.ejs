@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BookMyShow</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css">
+  <link rel="icon" href="https://play-lh.googleusercontent.com/6EUtq1eikgd6WA2XQfw1UPX4AE27GxjDg8Ag4puhPdF3JachveKlxx9IJ-3w12yX1OM">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="style.css">
+
+
+  </style>
+</head>
+<body>
+
+<header>
+  <nav class="navbar navbar-expand-lg pvr-navbar">
+    <div class="container-fluid">
+
+      <a class="navbar-brand pvr-logo" href="/">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/7/75/Bookmyshow-logoid.png"   alt="PVR Logo" 
+           >
+      </a>
+
+      <div class="ms-auto">
+        <a href="/add_movie" class="btn btn-warning btn-add-movie">
+          <i class="fas fa-plus-circle"></i> Add Movie
+        </a>
+      </div>
+
+    </div>
+  </nav>
+</header>
+
+<div id="pvrSlider" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#pvrSlider" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#pvrSlider" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#pvrSlider" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    <button type="button" data-bs-target="#pvrSlider" data-bs-slide-to="3" aria-label="Slide 4"></button>
+    <button type="button" data-bs-target="#pvrSlider" data-bs-slide-to="4" aria-label="Slide 5"></button>
+  </div>
+
+  <div class="carousel-inner">
+   
+ 
+    <div class="carousel-item active">
+      <img src="https://assets-in.bmscdn.com/discovery-catalog/events/et00442830-nxdqrergur-landscape.jpg" class="d-block w-100" alt="Slide 1">
+    </div>
+    <div class="carousel-item">
+      <img src="https://pbs.twimg.com/media/GDV8gAmXUAAKimD.jpg:large" class="d-block w-100" alt="Slide 2">
+    </div>
+    <div class="carousel-item">
+      <img src="https://mrandmrs55.com/wp-content/uploads/2012/05/sholay-1975-poster2.jpg" class="d-block w-100" alt="Slide 3">
+    </div>
+    <div class="carousel-item">
+      <img src="https://static0.srcdn.com/wordpress/wp-content/uploads/2018/02/Marvel-Studios-10-Year-MCU-Banner.jpg?w=1200&h=628&fit=crop" class="d-block w-100" alt="Slide 4">
+    </div>
+    <div class="carousel-item">
+      <img src="https://media.iifa.com/iifa-assets/1702644154_website-blog-banner_3.jpg" class="d-block w-100" alt="Slide 5">
+    </div>
+  </div>
+
+  <button class="carousel-control-prev" type="button" data-bs-target="#pvrSlider" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#pvrSlider" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+<style>
+
+</style>
+<section class="container py-4">
+    <div class="d-flex align-items-center justify-content-between mb-3">
+    <h2 class="bms-section-title" >Movies Collection</h2>
+  
+  </div>
+  
+<form class="d-flex search-form" role="search" method="GET">
+            <input class="form-control me-2" type="search" placeholder="Search Movies..." name="q" value="<%= searchQuery %>">
+            <button class="btn btn-search" type="submit">Search</button>
+          </form>
+           Category Filter
+  <div class="pill-wrap text-center mb-4">
+    <% const categories = [
+      "All","Bollywood","Hollywood","Animation","Comedy","Horror",
+      "South Indian ",
+    ]; %>
+
+    <% categories.forEach(cat => { %>
+      <a href="/?category=<%= cat %>" 
+         class="btn-category <%= (currentCategory && currentCategory.toLowerCase() === cat.toLowerCase()) ? 'active' : '' %>">
+         <%= cat.toUpperCase() %>
+      </a>
+    <% }) %>
+  </div>
+
+
+  <div class="bms-grid">
+    <% movies.forEach(m => { %>
+      <article class="bms-card">
+        <div class="poster-wrap">
+          <img class="poster" src="<%= m.image %>" alt="<%= m.name %>" onerror="this.src='/images/placeholder-poster.jpg'"/>
+
+          <% if (m.offer) { %>
+            <span class="offer-pill"><i class="fa-solid fa-ticket"></i> <%= m.offer %></span>
+          <% } %>
+
+          <div class="bottom-bar">
+            <span class="rating-pill">
+              <i class="fa-solid fa-star"></i> <%= (m.rating || '0') %>/10
+            </span>
+            <a href="/view-movie/<%= m._id %>" class="btn-view-mini">
+              <i class="fa-solid fa-eye"></i> View
+            </a>
+          </div>
+        </div>
+
+        <div class="movie-info">
+          <h3 class="movie-name"><%= m.name %></h3>
+          <p class="movie-genres"><%= m.category %> / <%= m.language %></p>
+
+          <div class="bms-actions">
+            <a href="/edit-movie/<%= m._id %>" class="btn-action btn-edit">
+              <i class="fa-solid fa-pen-to-square"></i> Edit
+            </a>
+            <a href="/delete-movie/<%= m._id %>" class="btn-action btn-delete"
+               onclick="return confirm('Are you sure you want to delete this movie?')">
+              <i class="fa-solid fa-trash"></i> Delete
+            </a>
+          </div>
+        </div>
+      </article>
+    <% }) %>
+  </div>
+</section>
+
+  
+
+<div class="b-footer">
+  © 2025 BookMyShow Cinemas — Designed with ❤️ for Movie Lovers
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

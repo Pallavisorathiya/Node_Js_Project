@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title><%= movie?.name || 'Movie' %> • View</title>
+  <link rel="icon" href="https://play-lh.googleusercontent.com/6EUtq1eikgd6WA2XQfw1UPX4AE27GxjDg8Ag4puhPdF3JachveKlxx9IJ-3w12yX1OM">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <style>
+    :root{
+      --bg:#f4f5f7;
+      --card:#ffffff;
+      --ink:#111;
+      --muted:#5f6573;
+      --chip:#61656c;
+      --line:#e9ebf0;
+      --accent:#ff3b30;
+      --shadow:0 14px 40px rgba(16,24,40,.12);
+    }
+
+    body{ background:#fff; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"; color:var(--ink); }
+
+    .view-wrap{
+      max-width:1180px; margin:28px auto; padding:0 18px 36px;
+      display:grid; grid-template-columns: 420px 1fr; gap:28px;
+    }
+  
+    .poster-card{
+      background:#0d0f12;
+       border-radius:18px; overflow:hidden; position:relative;
+      box-shadow:var(--shadow);
+    }
+    .poster-card img{ width:100%; height:100%; object-fit:cover; aspect-ratio:2/3; }
+    .age-chip{
+      position:absolute; top:16px; left:16px;
+      background:#ffe1e5; color:#c51c2f; font-weight:800; border-radius:999px;
+      padding:6px 12px; font-size:.9rem; box-shadow:0 6px 16px rgba(197,28,47,.25);
+    }
+    .rating-bar{
+      position:absolute; bottom:14px; left:14px; right:14px;
+      background:rgba(15,17,20,.85); border:1px solid rgba(255,255,255,.08);
+      color:#fff; border-radius:12px; padding:10px 14px;
+      display:flex; align-items:center; justify-content:space-between;
+      backdrop-filter: blur(6px);
+    }
+    .rating-bar .score{ font-weight:800; display:flex; align-items:center; gap:8px; }
+    .rating-bar .score i{ color:#f5c518; }
+
+    .details{
+      background:var(--card); border-radius:18px; border:1px solid var(--line);
+      box-shadow:var(--shadow); padding:26px;
+    }
+    .movie-title{ font-weight:800; 
+      color: #000;
+      font-size:clamp(26px,3.2vw,36px); margin:0 0 8px; }
+    .tagline{ color:#333; opacity:.85; margin-bottom:18px; }
+
+    .stat-grid{
+      display:grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap:18px; margin:24px 0 8px;
+      color: black; background-color: white;
+    }
+   
+
+   /* ===== Chips – uniform style ===== */
+.chips { display:flex; flex-wrap:wrap; gap:12px; margin:18px 0 6px; }
+
+.chip,
+.chip-clock{
+  display:inline-flex; align-items:center; gap:10px;
+  padding:10px 14px; border-radius:999px;
+  font-weight:700; font-size:.95rem; line-height:1;
+  border:1px solid var(--line); box-shadow:0 6px 16px rgba(16,24,40,.10);
+  transition:transform .12s ease, box-shadow .12s ease;
+}
+.chip i,
+.chip-clock i{ font-size:.95rem; opacity:.95; }
+
+/* generic chip (date / format) – light */
+.chip{
+  background:#f7f8fb; color:#2b2f38; border-color:#eef0f4;
+}
+
+/* duration chip – soft red theme */
+.chip-clock{
+  background:linear-gradient(180deg,#ffecef 0%, #ffd9de 100%);
+  color:#c51c2f; border-color:#ffc9d1;
+}
+.chip-clock i{ 
+  background:rgba(197,28,47,.10);
+  width:24px; height:24px; display:grid; place-items:center; 
+  border-radius:999px;
+}
+
+.chip:hover, .chip-clock:hover{
+  transform:translateY(-1px);
+  box-shadow:0 10px 20px rgba(16,24,40,.16);
+}
+
+.stat-grid .label{ color:#7a8190; font-weight:600; font-size:.9rem; }
+.stat-grid .value{ font-weight:700; margin-top:4px; }
+
+
+    .btn-row{ display:flex; gap:16px; margin-top:22px; flex-wrap:wrap; }
+    .btn-solid{
+      background-color: #e9324c !important; color:#fff; border:none; border-radius:14px; padding:14px 22px;
+      font-weight:800; text-decoration:none; display:inline-flex; align-items:center; gap:10px;
+      transition: transform .15s ease, box-shadow .15s ease;
+    }
+    .btn-solid:hover{ transform: translateY(-1px); box-shadow:0 10px 20px rgba(0,0,0,.2); }
+    .btn-ghost{
+      background-color: #e9324c !important;  color:#fff; border:none; border-radius:14px; padding:14px 22px;
+      font-weight:800; text-decoration:none; display:inline-flex; align-items:center; gap:10px;
+      opacity:.95;
+    }
+
+        .pvr-navbar {
+      background-color: white;
+      padding: 0.6rem 1rem;
+    }
+    .pvr-logo img {
+      height: 45px;
+      width: auto;
+    }
+    .btn-add-movie {
+    background-color: #e9324c !important;
+      white-space: nowrap;
+      font-weight: 500;
+      color: #fff;
+    
+    }
+      #pvrSlider .carousel-item img {
+    height: 420px;         
+    object-fit: cover;
+  }
+
+body {
+  /* background: #0d0d0d; */
+  font-family: 'Poppins', sans-serif;
+  color: #fff;
+}
+.back-home{
+    
+    border: none;
+    color: #000;
+    border-radius: 50px;
+    transition: 0.3s;
+    margin-right: 10px;
+}
+.back-home:hover {
+    background-color: whitesmoke;
+    color: #000;
+    /* background: linear-gradient(90deg, #ff9900, #ff6600); */
+    transform: scale(1.05);
+}
+.chip-clock{
+  background: #ffe1e5; color: #c51c2f; font-weight: 800; border-radius: 999px;
+  padding: 6px 12px; font-size: .9rem; box-shadow: 0 6px 16px rgba(197, 28, 47, .25);
+}
+.b-footer {
+
+  background-color: white;
+  color: black;                     
+  text-align: center;              
+  padding: 14px 10px;             
+  font-size: 0.95rem;               
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  border-top: 1px solid #fff;       
+}
+
+.b-footer span {
+  color: #ff4b5c;                  
+}
+
+.b-footer i {
+  color: #ff4b5c;                   
+}
+  </style>
+</head>
+<body>
+
+  <header>
+  <nav class="navbar navbar-expand-lg pvr-navbar">
+    <div class="container-fluid">
+      <a class="navbar-brand pvr-logo" href="/">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/7/75/Bookmyshow-logoid.png" alt="PVR Logo">
+      </a>
+
+      <div class="ms-auto">
+        <div class="nav-buttons">
+          <a href="/" class="back-home btn home-btn">
+            <i class="fas fa-home"></i> Back to Home
+          </a>
+          <a href="/add_movie" class="btn btn-warning btn-add-movie">
+            <i class="fas fa-plus-circle"></i> Add Movie
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+  <main class="view-wrap">
+
+    <section class="poster-card">
+      <% if (movie?.ageValidation){ %>
+        <span class="age-chip">Age: <%= movie.ageValidation %></span>
+      <% } %>
+
+      <img src="<%= movie?.image %>" alt="<%= movie?.name %>" onerror="this.src='/images/placeholder-poster.jpg'">
+
+      <div class="rating-bar">
+        <div class="score">
+          <i class="fa-solid fa-star"></i>
+          <span><%= movie?.rating ? Number(movie.rating).toFixed(1) : '0.0' %>/10</span>
+        </div>
+        <% if (movie?.votes){ %><small class="text-white-50"><%= movie.votes %> votes</small><% } %>
+      </div>
+    </section>
+
+    <section class="details">
+      <h1 class="movie-title"><%= movie?.name %></h1>
+      <% if (movie?.desc){ %>
+        <p class="tagline"><%= movie.desc %></p>
+      <% } %>
+
+      <div class="stat-grid">
+        <div class="stat"><div class="label">Status</div><div class="value"><%= movie?.status || '-' %></div></div>
+        <div class="stat"><div class="label">Language</div><div class="value"><%= movie?.language || '-' %></div></div>
+        <div class="stat"><div class="label">Category</div><div class="value"><%= movie?.category || '-' %></div></div>
+        <div class="stat"><div class="label">Rating</div><div class="value"><i class="fa-solid fa-star" style="color:#f5c518"></i> <%= movie?.rating ? Number(movie.rating).toFixed(1) : '0.0' %>/10</div></div>
+      </div>
+
+      <div class="chips">
+      
+        <% if (movie?.duration) { 
+     let hours = Math.floor(movie.duration / 60);
+     let minutes = movie.duration % 60;
+%>
+  <span class="chip-clock">
+    <i class="fa-regular fa-clock"></i>
+    <% if (hours > 0) { %>
+      <%= hours %>h 
+    <% } %>
+    <% if (minutes > 0) { %>
+      <%= minutes %>m
+    <% } %>
+  </span>
+<% } %>
+
+        <% if (movie?.releaseDate){ %>
+          <span class="chip"><i class="fa-regular fa-calendar"></i> <%= new Date(movie.releaseDate).toDateString() %></span>
+        <% } %>
+        <% if (movie?.format){ %>
+          <span class="chip"><i class="fa-solid fa-film"></i> <%= movie.format %></span>
+        <% } %>
+      </div>
+
+      <div class="btn-row">
+        <a href="/" class="btn-solid">
+          <i class="fa-solid fa-ticket"></i> BOOK NOW
+        </a>
+        <a href="/" class="btn-ghost">
+          <i class="fa-solid fa-arrow-left-long"></i> BACK TO MOVIES
+        </a>
+      </div>
+    </section>
+  </main>
+  <div class="b-footer">
+  © 2025 BookMyShow Cinemas — Designed with ❤️ for Movie Lovers
+</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
