@@ -254,29 +254,23 @@ body {
           <div class="movie-icon"><i class="fas fa-language"></i></div>
         </div>
 
-        <!-- <div class="col-md-6 position-relative">
-          <label class="form-label">Duration (in minutes)</label>
-          <input type="number" class="form-control" name="duration" value="<%= movies.duration %>" placeholder="Enter duration" min="1" required>
-          <div class="movie-icon"><i class="fas fa-hourglass-half"></i></div>
-        </div> -->
+     
         <div class="col-md-6 position-relative">
   <label class="form-label">Duration (Hours & Minutes)</label>
 
   <div class="d-flex align-items-center gap-2">
-    <!-- Hours Input -->
+
     <input type="number" class="form-control" name="hours" id="hours"
       placeholder="Hours" min="0"
       value="<%= Math.floor(movies.duration / 60) %>" required>
 
     <span style="font-weight: bold;">:</span>
 
-    <!-- Minutes Input -->
     <input type="number" class="form-control" name="minutes" id="minutes"
       placeholder="Minutes" min="0" max="59"
       value="<%= movies.duration % 60 %>" required>
   </div>
 
-  <!-- Hidden total minutes input -->
   <input type="hidden" name="duration" id="duration"
     value="<%= movies.duration %>">
 
