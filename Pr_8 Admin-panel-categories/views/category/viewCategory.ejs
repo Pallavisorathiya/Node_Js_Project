@@ -1,0 +1,126 @@
+<%- include('../header') %>
+
+    <div class="page-wrapper">
+        <!-- Flash Alerts -->
+        <% if (locals.success) { %>
+            <script>
+                Swal.fire({
+                    icon: "success",
+                    title: "<%= success %>",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            </script>
+            <% } %>
+
+                <% if (locals.error) { %>
+                    <script>
+                        Swal.fire({
+                            icon: "error",
+                            title: "<%= error %>",
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    </script>
+                    <% } %>
+
+                        <div class="page-breadcrumb">
+                            <div class="row">
+                                <div class="col-12 d-flex no-block align-items-center">
+                                    <h4 class="page-title">All Categories</h4>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="card">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Category Name</th>
+                                                    <th>Category Image</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                                <% categories.forEach((category, i)=> { %>
+                                                    <tr>
+                                                        <td>
+                                                            <%= i+1 %>
+                                                        </td>
+                                                        <td>
+                                                            <%= category.categoryName %>
+                                                        </td>
+                                                        <td><img src="<%= category.categoryImage %>" height="100"
+                                                                width="150"></td>
+
+                                                        <td>
+                                                            <a href="/category/edit-category/<%= category._id %>">
+                                                                <i class="fas fa-edit"></i>
+                                                            </a>
+
+                                                            &nbsp;&nbsp;&nbsp;&nbsp;
+
+                                                            <a href="javascript:void(0)"
+                                                                onclick="deleteCategory('<%= category._id %>')">
+                                                                <i class="fas fa-trash"></i>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                    <% }) %>
+                                            </tbody>
+
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+    </div>
+
+    <script>
+function deleteCategory(id) {
+    Swal.fire({
+        title: "Delete Category?",
+        html: "<b>This action cannot be undone!</b><br><br>All SubCategories & ExtraCategories linked to this category will also be removed.",
+        icon: "warning",
+        iconColor: "#ff6b6b",
+        showCancelButton: true,
+        confirmButtonText: "Delete",
+        cancelButtonText: "Cancel",
+        confirmButtonColor: "#e63946",
+        cancelButtonColor: "#6c757d",
+        background: "#fff",
+        customClass: {
+            title: "swal-title",
+            popup: "swal-popup",
+        },
+        showClass: {
+            popup: "animate__animated animate__zoomIn"
+        },
+        hideClass: {
+            popup: "animate__animated animate__zoomOut"
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire({
+                title: "Deleted!",
+                text: "Category removed successfully.",
+                icon: "success",
+                showConfirmButton: false,
+                timer: 1200
+            });
+
+            setTimeout(() => {
+                window.location.href = `/category/delete-category/${id}`;
+            }, 1200);
+        }
+    });
+}
+</script>
+
+
+    <%- include('../footer') %>

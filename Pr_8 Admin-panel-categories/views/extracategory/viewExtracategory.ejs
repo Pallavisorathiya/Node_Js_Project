@@ -1,0 +1,148 @@
+<%- include('../header') %>
+
+<div class="page-wrapper">
+
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-12 d-flex no-block align-items-center">
+                <h4 class="page-title">All Extra Categories</h4>
+                <div class="ml-auto text-right">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Extra Category</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Category Name</th>
+                                <th>Category Image</th>
+                                <th>Sub Category Name</th>
+                                <th>Extra Category Name</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <% if (Array.isArray(extraCategories) && extraCategories.length) { %>
+
+                                <% extraCategories.forEach((item, i)=> { %>
+                                <tr>
+
+                                    <td><%= i + 1 %></td>
+
+                                    <!-- Category Name -->
+                                    <td>
+                                        <%= item.categoryId 
+                                            ? item.categoryId.categoryName 
+                                            : 'N/A' %>
+                                    </td>
+
+                                    <!-- Category Image -->
+                                    <td>
+                                        <% if (item.categoryId && item.categoryId.categoryImage) { %>
+                                            <img src="<%= item.categoryId.categoryImage %>" 
+                                                 height="90" width="150" 
+                                                 style="border-radius:6px;">
+                                        <% } else { %>
+                                            No Image
+                                        <% } %>
+                                    </td>
+
+                                    <!-- Sub Category Name -->
+                                    <td>
+                                        <%= item.subCategoryId 
+                                            ? item.subCategoryId.subCategoryName 
+                                            : 'N/A' %>
+                                    </td>
+
+                                    <!-- Extra Category Name -->
+                                    <td><%= item.extraCategory %></td>
+
+                                    <!-- Actions -->
+                                    <td>
+                                        <a href="/extracategory/edit-extracategory/<%= item._id %>">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                        <a href="/extracategory/delete-extracategory/<%= item._id %>">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </td>
+
+                                </tr>
+                                <% }) %>
+
+                            <% } else { %>
+
+                                <tr>
+                                    <td colspan="6">No Extra Categories Found</td>
+                                </tr>
+
+                            <% } %>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<%- include('../footer') %>
+<script>
+function deleteExtraCategory(id) {
+    Swal.fire({
+        title: "Delete Extra Category?",
+        html: "<b>This action cannot be undone!</b><br><br>This Extra Category will be permanently removed.",
+        icon: "warning",
+        iconColor: "#ff6b6b",
+        showCancelButton: true,
+        confirmButtonText: "Delete",
+        cancelButtonText: "Cancel",
+        confirmButtonColor: "#e63946",
+        cancelButtonColor: "#6c757d",
+        background: "#ffffff",
+        customClass: {
+            popup: "swal-popup",
+            title: "swal-title"
+        },
+        showClass: {
+            popup: "animate__animated animate__zoomIn"
+        },
+        hideClass: {
+            popup: "animate__animated animate__zoomOut"
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+
+            Swal.fire({
+                title: "Deleted!",
+                text: "Extra Category removed successfully.",
+                icon: "success",
+                showConfirmButton: false,
+                timer: 1000
+            });
+
+            setTimeout(() => {
+                window.location.href = `/extracategory/delete-extracategory/${id}`;
+            }, 1000);
+        }
+    });
+}
+</script>
