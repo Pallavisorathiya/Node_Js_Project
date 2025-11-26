@@ -1,14 +1,7 @@
 const express = require('express');
 const routes = express.Router();
 
-const {
-    addCategoryPage,
-    viewCategoryPage,
-    editCategoryPage,
-    updateCategory,
-    addNewCategory,
-    deleteCategory
-} = require('../controllers/category.controller');
+const { addCategoryPage, viewCategoryPage,editCategoryPage, updateCategory, addNewCategory,deleteCategory} = require('../controllers/category.controller');
 
 const uploadImage = require('../middleware/uploadImage');
 

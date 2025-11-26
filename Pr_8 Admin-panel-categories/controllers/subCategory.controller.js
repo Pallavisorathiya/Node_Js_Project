@@ -3,7 +3,6 @@ const Category = require('../models/category.model');
 const SubCategory = require('../models/subcategory.model');
 const ExtraCategory = require('../models/extraCategory.model');
 
-// Render Add page
 exports.addSubCategoryPage = async (req, res) => {
   try {
     const categories = await Category.find();

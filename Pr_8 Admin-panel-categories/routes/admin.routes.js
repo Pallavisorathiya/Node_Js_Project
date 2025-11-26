@@ -1,12 +1,5 @@
 const express = require('express');
-const { 
-  addAdminPage, 
-  viewAdminPage, 
-  addAdmin, 
-  deleteAdmin, 
-  editAdmin, 
-  updateAdmin 
-} = require('../controllers/admin.controller');
+const { addAdminPage, viewAdminPage, addAdmin, deleteAdmin, editAdmin,updateAdmin} = require('../controllers/admin.controller');
 
 const uploadImage = require('../middleware/uploadImage');
 const passport = require('passport');
@@ -20,15 +13,12 @@ function setAuthenticated(req, res, next) {
   return res.redirect('/');
 }
 
-// ================== Admin Routes ==================
 
-// Pages
 routes.get("/add-admin", setAuthenticated, addAdminPage);
 routes.get("/view-admin", setAuthenticated, viewAdminPage);
 routes.get("/edit-admin/:id", setAuthenticated, editAdmin);
 routes.get("/delete-admin/:id", setAuthenticated, deleteAdmin);
 
-// Form submissions
 routes.post("/add-admin", uploadImage.single('profileImage'), addAdmin);
 routes.post("/update-admin/:id", uploadImage.single('profileImage'), updateAdmin);
 

@@ -91,6 +91,7 @@ exports.getAllProducts = async (req, res) => {
 // SINGLE PRODUCT
 exports.getProduct = async (req, res) => {
   try {
+    req.flash('success', 'Get Single Product Success!!!');
     const product = await Product.findById(req.params.id)
       .populate("category")
       .populate("subcategory")
@@ -114,9 +115,11 @@ exports.getProduct = async (req, res) => {
 
 exports.getSubCategories = async (req, res) => {
   try {
+    req.flash('success', 'Get Sub Category Success!!!');
     const data = await SubCategory.find({ category: req.params.id });
     return res.json(data);
   } catch (err) {
+    req.flash('error', 'Something Error');
     console.log("GET SUBCATEGORIES ERROR", err);
     return res.json([]);
   }
@@ -124,9 +127,11 @@ exports.getSubCategories = async (req, res) => {
 
 exports.getExtraCategory = async (req, res) => {
   try {
+    req.flash('success', 'Get Extra Category Success!!!');
     const data = await ExtraCategory.find({ subCategoryId: req.params.id });
     return res.json(data);
   } catch (err) {
+    req.flash('error', 'Something Error');
     console.log("GET EXTRACATEGORIES ERROR", err);
     return res.json([]);
   }
@@ -135,11 +140,13 @@ exports.getExtraCategory = async (req, res) => {
 // DELETE PRODUCT
 exports.deleteProduct = async (req, res) => {
   try {
+  
     await Product.findByIdAndDelete(req.params.id);
 
     req.flash && req.flash("success", "Product Deleted Successfully!");
     return res.redirect("/product/view-product");
   } catch (error) {
+    req.flash('error', 'Something Error');
     console.log("DELETE PRODUCT ERROR →", error);
     req.flash && req.flash("error", "Something Went Wrong!");
     return res.redirect("back");
@@ -149,6 +156,7 @@ exports.deleteProduct = async (req, res) => {
 // LOAD EDIT PRODUCT PAGE
 exports.editProductPage = async (req, res) => {
   try {
+    req.flash('success', 'Product Edit Success!!!');
     let id = req.params.id;
 
     let product = await Product.findById(id);
@@ -166,6 +174,7 @@ exports.editProductPage = async (req, res) => {
     });
 
   } catch (error) {
+    request.flash && request.flash("error", "Something Went Wrong!");
     console.log(error);
     return res.redirect("/product/view-product");
   }
@@ -174,6 +183,7 @@ exports.editProductPage = async (req, res) => {
 // UPDATE PRODUCT
 exports.updateProduct = async (req, res) => {
   try {
+    req.flash('success', 'Product Updated Success!!!');
     const id = req.params.id;
 
     let obj = {
@@ -195,6 +205,7 @@ exports.updateProduct = async (req, res) => {
     return res.redirect("/product/view-product");
 
   } catch (error) {
+    req.flash('error', 'Something Error');
     console.log(error);
     return res.redirect("/product/view-product");
   }

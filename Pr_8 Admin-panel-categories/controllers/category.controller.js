@@ -2,7 +2,6 @@ const CategoryModel = require('../models/category.model');
 const SubCategory = require("../models/subCategory.model");
 const ExtraCategory = require("../models/extraCategory.model");
 
-// Add Category Page
 exports.addCategoryPage = async (req, res) => {
     try {
         res.render("category/addCategory", { user: req.user || null });
@@ -12,7 +11,6 @@ exports.addCategoryPage = async (req, res) => {
     }
 };
 
-// View Category Page
 exports.viewCategoryPage = async (req, res) => {
     try {
         let categories = await CategoryModel.find();
@@ -23,7 +21,6 @@ exports.viewCategoryPage = async (req, res) => {
     }
 };
 
-// Add New Category
 exports.addNewCategory = async (req, res) => {
     try {
         let imagePath = "";
@@ -44,7 +41,6 @@ exports.addNewCategory = async (req, res) => {
     }
 };
 
-// Edit Category Page
 exports.editCategoryPage = async (req, res) => {
     try {
         let category = await CategoryModel.findById(req.params.id);
@@ -76,7 +72,6 @@ exports.updateCategory = async (req, res) => {
     }
 };
 
-// Delete Category
 exports.deleteCategory = async (req, res) => {
     try {
         const id = req.params.id;
